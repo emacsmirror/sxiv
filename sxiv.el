@@ -1,14 +1,19 @@
+;;; sxiv.el --- Run sxiv from Emacs
+
+;;; Commentary:
+;;
+
 (require 'dash)
+
+;;; Code:
 
 (defvar sxiv--directory nil
   "Directory `sxiv' was called from.
 Used by `sxiv-filter' to know where to mark files.")
 
 (defun sxiv-dired-marked-files-p ()
-  "Return t if there are marked files in the current Dired
-buffer. With no marked files, or if not in a Dired buffer, return
-nil."
-  (interactive)
+  "Return t if there are marked files in the current Dired buffer.
+With no marked files, or if not in a Dired buffer, return nil."
   (if (equal major-mode 'dired-mode)
       (if (save-excursion
             (goto-char (point-min))
@@ -17,8 +22,8 @@ nil."
         nil)
     nil))
 
-(defun sxiv-filter (process output)
-  "Open a dired buffer and mark any files marked by the user in `sxiv'.
+(defun sxiv-filter (_process _output)
+  "Open a `dired' buffer and mark any files marked by the user in `sxiv'.
 Used as process filter for `sxiv'."
   (find-file sxiv--directory)
   (--> output
@@ -27,7 +32,7 @@ Used as process filter for `sxiv'."
        (sxiv-dired-mark-files it)))
 
 (defun sxiv-dired-mark-files (files)
-  (interactive)
+  "Mark FILES in the current (dired) buffer."
   (dired-mark-if
    (and (not (looking-at-p dired-re-dot))
         (not (eolp))
@@ -43,8 +48,8 @@ current directory. Files marked in sxiv will be marked in Dired.
 If run from a Dired buffer with marked files, open only those
 files.
 
-With prefix argument, or when only provided directories, run
-recursively (-r).
+With prefix argument PREFIX, or when only provided directories,
+run recursively (-r).
 
 If run from a text file containing one file name per line, open
 the files listed."
@@ -86,3 +91,7 @@ the files listed."
 ;; Local Variables:
 ;; nameless-current-name: "sxiv"
 ;; End:
+
+(provide 'sxiv)
+
+;;; sxiv.el ends here
