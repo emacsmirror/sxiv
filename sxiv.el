@@ -1,4 +1,9 @@
-;;; sxiv.el --- Run sxiv from Emacs
+;;; sxiv.el --- Run the sxiv image viewer from Emacs -*- lexical-binding: t; -*-
+
+;; Author: contrapunctus <xmpp:contrapunctus@jabber.fr>
+;; Maintainer: contrapunctus <xmpp:contrapunctus@jabber.fr>
+;; Package-Requires: (dash)
+;; Version: 0.1.0
 
 ;;; Commentary:
 ;;
