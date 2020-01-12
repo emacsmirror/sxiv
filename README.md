@@ -1,10 +1,10 @@
 # sxiv.el
-Launch sxiv (Simple X Image Viewer) from Emacs, with Dired integration.
+Launch [sxiv](https://github.com/muennich/sxiv) (Simple X Image Viewer) from Emacs, with Dired integration.
 
 ## Installation
 You can get `sxiv.el` from
 
-`sxiv.el` requires [dash.el](https://github.com/magnars/dash.el) and an installed sxiv in your $PATH
+`sxiv.el` requires [dash.el](https://github.com/magnars/dash.el) and an installed [sxiv](https://github.com/muennich/sxiv) in your $PATH
 
 ## Usage
 `M-x sxiv` - entry point. Run it in a Dired buffer containing images. Files marked in sxiv will be marked in Dired.
