@@ -4,7 +4,7 @@ Launch sxiv (Simple X Image Viewer) from Emacs, with Dired integration.
 ## Installation
 You can get `sxiv.el` from
 
-`sxiv.el` requires [dash.el](https://github.com/magnars/dash.el)
+`sxiv.el` requires [dash.el](https://github.com/magnars/dash.el) and an installed sxiv in your $PATH
 
 ## Usage
 `M-x sxiv` - entry point. Run it in a Dired buffer containing images. Files marked in sxiv will be marked in Dired.
@@ -23,7 +23,14 @@ Run it from a text file containing one file name per line to open the listed fil
 * What should be the behavior when we open Dired-marked files, then mark files within sxiv?
 
 ## Limitations
+* Currently falls flat if run in directories with a huge number of images.
 * `sxiv-dired-marked-files-p` doesn't work as intended with non '*' markers (e.g. C or D)
+
+## Comparison with picpocket
+At a cursory glance, picpocket (v20180914)
+* 👍 does not depend on any external programs
+* 👎 does not open directories recursively
+* 👎 cannot be used to visually mark files in Dired
 
 ## Contributions and contact
 Feedback and MRs very welcome. 🙂
