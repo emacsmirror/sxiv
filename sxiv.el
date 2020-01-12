@@ -1,8 +1,8 @@
-;;; sxiv.el --- Run the sxiv image viewer from Emacs -*- lexical-binding: t; -*-
+;;; sxiv.el --- Run the sxiv image viewer -*- lexical-binding: t; -*-
 
 ;; Author: contrapunctus <xmpp:contrapunctus@jabber.fr>
 ;; Maintainer: contrapunctus <xmpp:contrapunctus@jabber.fr>
-;; Package-Requires: (dash)
+;; Package-Requires: (dash (emacs "25.1"))
 ;; Version: 0.1.0
 
 ;;; Commentary:
@@ -27,9 +27,11 @@ With no marked files, or if not in a Dired buffer, return nil."
         nil)
     nil))
 
-(defun sxiv-filter (_process _output)
+(defun sxiv-filter (_process output)
   "Open a `dired' buffer and mark any files marked by the user in `sxiv'.
-Used as process filter for `sxiv'."
+Used as process filter for `sxiv'.
+
+OUTPUT is the output of the sxiv process as a string."
   (find-file sxiv--directory)
   (--> output
        (split-string it "\n")
