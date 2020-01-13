@@ -21,6 +21,10 @@
 It must contain \"-o\" for marking in Dired buffers to function."
   :type '(repeat string))
 
+(defcustom sxiv-exclude-strings '()
+  "Exclude files whose paths match these strings."
+  :type '(repeat string))
+
 (defvar sxiv--directory nil
   "Directory `sxiv' was called from.
 Used by `sxiv-filter' to know where to mark files.")
@@ -78,7 +82,10 @@ the files listed."
                               (split-string it "\n")))
                         (t (directory-files default-directory))))
          (paths   (--remove (or (equal it ".")
-                                (equal it ".."))
+                                (equal it "..")
+                                (-find (lambda (exclude)
+                                         (string-match-p exclude it))
+                                       sxiv-exclude-strings))
                             paths))
          ;; recurse with prefix arg, or if every path is a directory
          (recurse (or prefix
