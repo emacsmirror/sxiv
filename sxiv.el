@@ -5,7 +5,7 @@
 ;; Keywords: multimedia
 ;; Homepage: https://notabug.org/contrapunctus/sxiv.el/src/master/sxiv.el
 ;; Package-Requires: ((dash "2.16.0") (emacs "25.1"))
-;; Version: 0.1.0
+;; Version: 0.2.0
 
 ;;; Commentary:
 ;;

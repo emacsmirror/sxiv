@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.2.0] - 2020-01-13
 ### Added
 * `sxiv-arguments` to hold argument list
+* `sxiv-exclude-strings` to exclude files by matching paths
 ### Fixed
 * Slow startup/freezing on large directories
 * `package-lint` fixes
