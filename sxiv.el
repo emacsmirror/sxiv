@@ -2,7 +2,9 @@
 
 ;; Author: contrapunctus <xmpp:contrapunctus@jabber.fr>
 ;; Maintainer: contrapunctus <xmpp:contrapunctus@jabber.fr>
-;; Package-Requires: (dash (emacs "25.1"))
+;; Keywords: multimedia
+;; Homepage: https://notabug.org/contrapunctus/sxiv.el/src/master/sxiv.el
+;; Package-Requires: ((dash "2.16.0") (emacs "25.1"))
 ;; Version: 0.1.0
 
 ;;; Commentary:
@@ -14,11 +16,15 @@
 
 (defgroup sxiv nil
   "Run the Simple X Image Viewer."
-  :group 'external)
+  :group 'multimedia)
 
 (defcustom sxiv-arguments '("-a" "-f" "-o")
   "Arguments to be passed to the sxiv process.
 It must contain \"-o\" for marking in Dired buffers to function."
+  :type '(repeat string))
+
+(defcustom sxiv-exclude-strings '()
+  "Exclude files whose paths match these strings."
   :type '(repeat string))
 
 (defvar sxiv--directory nil
@@ -78,7 +84,10 @@ the files listed."
                               (split-string it "\n")))
                         (t (directory-files default-directory))))
          (paths   (--remove (or (equal it ".")
-                                (equal it ".."))
+                                (equal it "..")
+                                (-find (lambda (exclude)
+                                         (string-match-p exclude it))
+                                       sxiv-exclude-strings))
                             paths))
          ;; recurse with prefix arg, or if every path is a directory
          (recurse (or prefix
