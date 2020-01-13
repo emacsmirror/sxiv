@@ -26,7 +26,7 @@ Run it from a text file containing one file name per line to open the listed fil
 * Currently falls flat if run in directories with a huge number of images.
 * `sxiv-dired-marked-files-p` doesn't work as intended with non '*' markers (e.g. C or D)
 
-## Comparison with picpocket
+## Comparison with [picpocket](https://github.com/johanclaesson/picpocket)
 At a cursory glance, picpocket (v20180914)
 * 👍 does not depend on any external programs
 * 👎 does not open directories recursively
