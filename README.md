@@ -28,9 +28,11 @@ Run it from a text file containing one file name per line to open the listed fil
 
 ## Comparison with [picpocket](https://github.com/johanclaesson/picpocket)
 At a cursory glance, picpocket (v20180914)
-* 👍 does not depend on any external programs
-* 👎 does not open directories recursively
-* 👎 cannot be used to visually mark files in Dired
+* ✔️ does not depend on an external program
+* ✔️ has better key customizability (to change the keys for sxiv itself, you need to modify its C source)
+* ✔️ supports tagging images
+* ✖️ has no way to mark files for batch operations
+* ✖️ does not seem to center images in fullscreen mode
 
 ## Contributions and contact
 Feedback and MRs very welcome. 🙂
