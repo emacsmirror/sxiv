@@ -66,12 +66,12 @@ the files listed."
                         ((derived-mode-p 'text-mode)
                          (--> (buffer-substring-no-properties (point-min)
                                                               (point-max))
-                              (split-string it "\n")
-                              (-drop-last 1 it))) ;; why?
+                              (split-string it "\n")))
                         (t (directory-files default-directory))))
          (paths   (--remove (or (equal it ".")
                                 (equal it ".."))
                             paths))
+         ;; recurse with prefix arg, or if every path is a directory
          (recurse (or prefix
                       (-every? #'file-directory-p paths)))
          ;; remove directories if not running recursively
