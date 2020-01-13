@@ -16,12 +16,13 @@ With prefix argument, or when only provided directories, run recursively.
 Run it from a text file containing one file name per line to open the listed files.
 
 ## TODO
-* Create user-customizable variable to hold default arguments
-* Start sxiv on the file at point (using `-n ...`)
-* Mark files in subdirectories if run recursively (by inserting the subdirectory into the current buffer)
-* Let user edit options (ideally with transient.el) when called with null argument/two prefix arguments
-* When running with a lot of files, sxiv may take some time to start. Signal to the user that it is starting, and let them kill it if they want.
-* What should be the behavior when we open Dired-marked files, then mark files within sxiv?
+1. Create user-customizable variable to hold default arguments
+2. Start sxiv on the file at point (using `-n ...`)
+3. Let user specify paths to be excluded.
+4. Mark files in subdirectories if run recursively (by inserting the subdirectory into the current buffer)
+5. Let user edit options (ideally with transient.el) when called with null argument/two prefix arguments
+6. When running with a lot of files, sxiv may take some time to start. Signal to the user that it is starting, and let them kill it if they want.
+7. What should be the behavior when we open Dired-marked files, then mark files within sxiv?
 
 ## Limitations
 * Currently falls flat if run in directories with a huge number of images.
