@@ -12,6 +12,15 @@
 
 ;;; Code:
 
+(defgroup sxiv nil
+  "Run the Simple X Image Viewer."
+  :group 'external)
+
+(defcustom sxiv-arguments '("-a" "-f" "-o")
+  "Arguments to be passed to the sxiv process.
+It must contain \"-o\" for marking in Dired buffers to function."
+  :type '(repeat string))
+
 (defvar sxiv--directory nil
   "Directory `sxiv' was called from.
 Used by `sxiv-filter' to know where to mark files.")
@@ -82,7 +91,10 @@ the files listed."
          (proc    (make-process :name "sxiv"
                                 :buffer "sxiv"
                                 :command
-                                (apply #'list "sxiv" "-afo" recurse "--" paths)
+                                (append '("sxiv")
+                                        sxiv-arguments
+                                        `(,recurse "--")
+                                        paths)
                                 :connection-type 'pipe
                                 :stderr "sxiv-errors")))
     (setq sxiv--directory default-directory)

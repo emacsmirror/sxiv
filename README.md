@@ -16,7 +16,7 @@ With prefix argument, or when only provided directories, run recursively.
 Run it from a text file containing one file name per line to open the listed files.
 
 ## TODO
-1. Create user-customizable variable to hold default arguments
+1. [x] Create user-customizable variable to hold default arguments
 2. Start sxiv on the file at point (using `-n ...`)
 3. Let user specify paths to be excluded.
 4. Mark files in subdirectories if run recursively (by inserting the subdirectory into the current buffer)
