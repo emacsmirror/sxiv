@@ -2,7 +2,9 @@
 
 ;; Author: contrapunctus <xmpp:contrapunctus@jabber.fr>
 ;; Maintainer: contrapunctus <xmpp:contrapunctus@jabber.fr>
-;; Package-Requires: (dash (emacs "25.1"))
+;; Keywords: multimedia
+;; Homepage: https://notabug.org/contrapunctus/sxiv.el/src/master/sxiv.el
+;; Package-Requires: ((dash "2.16.0") (emacs "25.1"))
 ;; Version: 0.1.0
 
 ;;; Commentary:
@@ -14,7 +16,7 @@
 
 (defgroup sxiv nil
   "Run the Simple X Image Viewer."
-  :group 'external)
+  :group 'multimedia)
 
 (defcustom sxiv-arguments '("-a" "-f" "-o")
   "Arguments to be passed to the sxiv process.
