@@ -75,21 +75,14 @@ the files listed."
          (recurse (or prefix
                       (-every? #'file-directory-p paths)))
          ;; remove directories if not running recursively
-         (paths   (->> (if recurse
-                           paths
-                         (seq-remove #'file-directory-p paths))
-                       (mapcar #'shell-quote-argument)
-                       (--reduce (concat acc " " it))))
+         (paths   (if recurse
+                      paths
+                    (seq-remove #'file-directory-p paths)))
          (recurse (if recurse "-r" ""))
          (proc    (make-process :name "sxiv"
                                 :buffer "sxiv"
                                 :command
-                                (list shell-file-name
-                                      shell-command-switch
-                                      (concat "sxiv -afo "
-                                              recurse
-                                              " -- "
-                                              paths))
+                                (apply #'list "sxiv" "-afo" recurse "--" paths)
                                 :connection-type 'pipe
                                 :stderr "sxiv-errors")))
     (setq sxiv--directory default-directory)

@@ -25,7 +25,6 @@ Run it from a text file containing one file name per line to open the listed fil
 7. What should be the behavior when we open Dired-marked files, then mark files within sxiv?
 
 ## Limitations
-* Currently falls flat if run in directories with a huge number of images.
 * `sxiv-dired-marked-files-p` doesn't work as intended with non '*' markers (e.g. C or D)
 
 ## Comparison with [picpocket](https://github.com/johanclaesson/picpocket)
