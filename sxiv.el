@@ -42,15 +42,25 @@ With no marked files, or if not in a Dired buffer, return nil."
         nil)
     nil))
 
+(defun sxiv-insert-subdirs (paths)
+  "Insert subdirectories from PATHS into the current Dired buffer.
+Return PATHS unchanged."
+  (mapc (lambda (path)
+          ;; is the file a direct child? (i.e. exists in the current directory?)
+          (unless (file-exists-p (file-name-nondirectory path))
+            (dired-insert-subdir (file-name-directory path))))
+        paths)
+  paths)
+
 (defun sxiv-filter (_process output)
   "Open a `dired' buffer and mark any files marked by the user in `sxiv'.
 Used as process filter for `sxiv'.
 
 OUTPUT is the output of the sxiv process as a string."
   (find-file sxiv--directory)
-  (--> output
-       (split-string it "\n")
+  (--> (split-string output "\n")
        (-drop-last 1 it)
+       (sxiv-insert-subdirs it)
        (sxiv-dired-mark-files it)))
 
 (defun sxiv-dired-mark-files (files)
