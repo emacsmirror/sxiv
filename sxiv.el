@@ -77,7 +77,9 @@ If run from a text file containing one file name per line, open
 the files listed."
   (interactive "P")
   (let* ((path-at-point (dired-file-name-at-point))
-         (fn-at-point   (when path-at-point
+         (fn-at-point   (when (and path-at-point
+                                   ;; REVIEW - also check if file is an image?
+                                   (file-regular-p path-at-point))
                           (file-relative-name path-at-point)))
          (paths         (cond ((sxiv-dired-marked-files-p)
                                (dired-get-marked-files))
@@ -103,10 +105,11 @@ the files listed."
                             paths
                           (seq-remove #'file-directory-p paths)))
          (fn-at-point-index (when fn-at-point
-                              (->> paths
-                                   (--find-index (equal fn-at-point it))
-                                   (1+)
-                                   (number-to-string))))
+                              (--find-index (equal fn-at-point it)
+                                            paths)))
+         (fn-at-point-index (when fn-at-point-index
+                              (-> (1+ fn-at-point-index)
+                                  (number-to-string))))
          (recurse       (if recurse "-r" ""))
          (proc          (make-process :name "sxiv"
                                       :buffer "sxiv"
