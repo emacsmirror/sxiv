@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 ### Added
 * Marking files now works recursively, too.
+* Show message when starting sxiv
 
 ## [0.3.0] - 2020-01-14
 ### Added

@@ -121,17 +121,19 @@ the files listed."
                               (-> (1+ fn-at-point-index)
                                   (number-to-string))))
          (recurse       (if recurse "-r" ""))
-         (proc          (make-process :name "sxiv"
-                                      :buffer "sxiv"
-                                      :command
-                                      (append '("sxiv")
-                                              sxiv-arguments
-                                              (when fn-at-point-index
-                                                (list "-n" fn-at-point-index))
-                                              (list recurse "--")
-                                              paths)
-                                      :connection-type 'pipe
-                                      :stderr "sxiv-errors")))
+         (proc          (progn
+                          (message "Running sxiv...")
+                          (make-process :name "sxiv"
+                                        :buffer "sxiv"
+                                        :command
+                                        (append '("sxiv")
+                                                sxiv-arguments
+                                                (when fn-at-point-index
+                                                  (list "-n" fn-at-point-index))
+                                                (list recurse "--")
+                                                paths)
+                                        :connection-type 'pipe
+                                        :stderr "sxiv-errors"))))
     (setq sxiv--directory default-directory)
     (set-process-filter proc #'sxiv-filter)))
 
