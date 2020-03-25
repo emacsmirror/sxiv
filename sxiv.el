@@ -17,7 +17,11 @@
 ;; For more information, please refer to <https://unlicense.org>
 
 ;;; Commentary:
+;; The sole command and primary entry point is `sxiv'.
 ;;
+;; `sxiv-filter' is the process filter, to insert subdirectories (via
+;; `sxiv-insert-subdirs') and mark files marked in sxiv (via
+;; `sxiv-dired-mark-files').
 
 (require 'dash)
 
@@ -61,6 +65,15 @@ Return PATHS unchanged."
         paths)
   paths)
 
+(defun sxiv-dired-mark-files (files)
+  "Mark FILES in the current (dired) buffer."
+  (dired-mark-if
+   (and (not (looking-at-p dired-re-dot))
+        (not (eolp))
+        (let ((fn (dired-get-filename t t)))
+          (and fn (--find (equal fn it) files))))
+   "file"))
+
 (defun sxiv-filter (_process output)
   "Open a `dired' buffer and mark any files marked by the user in `sxiv'.
 Used as process filter for `sxiv'.
@@ -71,15 +84,6 @@ OUTPUT is the output of the sxiv process as a string."
        (-drop-last 1 it)
        (sxiv-insert-subdirs it)
        (sxiv-dired-mark-files it)))
-
-(defun sxiv-dired-mark-files (files)
-  "Mark FILES in the current (dired) buffer."
-  (dired-mark-if
-   (and (not (looking-at-p dired-re-dot))
-        (not (eolp))
-        (let ((fn (dired-get-filename t t)))
-          (and fn (--find (equal fn it) files))))
-   "file"))
 
 (defun sxiv (&optional prefix)
   "Run sxiv(1), the Simple X Image Viewer.
