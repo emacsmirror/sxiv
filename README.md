@@ -23,6 +23,7 @@ Run it from a text file containing one file name per line to open the listed fil
 5. [ ] Let user edit options (ideally with transient.el) when called with null argument/two prefix arguments
 6. [ ] When running with a lot of files, sxiv may take some time to start. Signal to the user that it is starting, and let them kill it if they want.
 7. What should be the behavior when we open Dired-marked files, then mark files within sxiv?
+8. [ ] sxiv-exclude-strings does not work recursively, because only the directories are passed to the process. Adding all files to the path might cause it to fail, or take a long time.
 
 ## Limitations
 * `sxiv-dired-marked-files-p` doesn't work as intended with non '*' markers (e.g. C or D)
