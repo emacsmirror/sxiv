@@ -23,6 +23,7 @@
 ;; `sxiv-insert-subdirs') and mark files marked in sxiv (via
 ;; `sxiv-dired-mark-files').
 
+(require 'dired)
 (require 'dash)
 
 ;;; Code:
