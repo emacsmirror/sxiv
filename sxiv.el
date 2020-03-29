@@ -48,13 +48,10 @@ Used by `sxiv-filter' to know where to mark files.")
 (defun sxiv-dired-marked-files-p ()
   "Return t if there are marked files in the current Dired buffer.
 With no marked files, or if not in a Dired buffer, return nil."
-  (if (equal major-mode 'dired-mode)
-      (if (save-excursion
-            (goto-char (point-min))
-            (re-search-forward dired-re-mark nil t))
-          t
-        nil)
-    nil))
+  (and (derived-mode-p 'dired-mode)
+       (save-excursion
+         (goto-char (point-min))
+         (re-search-forward dired-re-mark nil t))))
 
 (defun sxiv-insert-subdirs (paths)
   "Insert subdirectories from PATHS into the current Dired buffer.
