@@ -58,7 +58,8 @@ With no marked files, or if not in a Dired buffer, return nil."
 Return PATHS unchanged."
   (mapc (lambda (path)
           ;; is the file a direct child? (i.e. exists in the current directory?)
-          (unless (file-exists-p (file-name-nondirectory path))
+          (unless (and (file-exists-p (file-name-nondirectory path))
+                       (file-directory-p path))
             (dired-insert-subdir (file-name-directory path))))
         paths)
   paths)

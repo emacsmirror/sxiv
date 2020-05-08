@@ -15,16 +15,6 @@ With prefix argument, or when only provided directories, run recursively.
 
 Run it from a text file containing one file name per line to open the listed files.
 
-## TODO
-1. [x] Create user-customizable variable to hold default arguments
-2. [x] Start sxiv on the file at point (using `-n ...`)
-3. [x] Let user specify paths to be excluded.
-4. [x] Mark files in subdirectories if run recursively (by inserting the subdirectory into the current buffer)
-5. [ ] Let user edit options (ideally with transient.el) when called with null argument/two prefix arguments
-6. [ ] When running with a lot of files, sxiv may take some time to start. Signal to the user that it is starting, and let them kill it if they want.
-7. What should be the behavior when we open Dired-marked files, then mark files within sxiv?
-8. [ ] sxiv-exclude-strings does not work recursively, because only the directories are passed to the process. Adding all files to the path might cause it to fail, or take a long time.
-
 ## Limitations
 * `sxiv-dired-marked-files-p` doesn't work as intended with non '*' markers (e.g. C or D)
 
@@ -38,6 +28,8 @@ At a cursory glance, picpocket (v20180914)
 
 ## Contributions and contact
 Feedback and MRs very welcome. 🙂
+
+You may be interested in the [TODO.md](TODO.md)
 
 Contact the creator and other Emacs users in the Emacs room on the Jabber network - [xmpp:emacs@salas.suchat.org?join](xmpp:emacs@salas.suchat.org?join) ([web chat](https://inverse.chat/#converse/room?jid=emacs@salas.suchat.org))
 
