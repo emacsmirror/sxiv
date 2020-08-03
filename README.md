@@ -36,9 +36,13 @@ Contact the creator and other Emacs users in the Emacs room on the Jabber networ
 (For help in getting started with Jabber, [click here](https://xmpp.org/getting-started/))
 
 ## License
-sxiv.el is released under your choice of [Unlicense](https://unlicense.org/) and the [WTFPL](http://www.wtfpl.net/).
+I dream of a world where all software is liberated - transparent, trustable, and accessible for anyone to use or improve. But I don't want to make demands or threats (e.g. via legal conditions) to get there.
 
-(See files [LICENSE](LICENSE) and [LICENSE.1](LICENSE.1)).
+I'd rather make a request - please do everything you can to help that dream come true. Please Unlicense as much software as you can.
+
+sxiv.el is released under your choice of [Unlicense](https://unlicense.org/) or the [WTFPL](http://www.wtfpl.net/).
+
+(See files [UNLICENSE](UNLICENSE) and [WTFPL](WTFPL)).
 
 ## Thanks
 wasamasa, bpalmer and #emacs for all their help and support
