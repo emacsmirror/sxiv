@@ -56,13 +56,17 @@ With no marked files, or if not in a Dired buffer, return nil."
 (defun sxiv-insert-subdirs (paths)
   "Insert subdirectories from PATHS into the current Dired buffer.
 Return PATHS unchanged."
-  (mapc (lambda (path)
-          ;; is the file a direct child? (i.e. exists in the current directory?)
-          (unless (and (file-exists-p (file-name-nondirectory path))
-                       (file-directory-p path))
-            (dired-insert-subdir (file-name-directory path))))
-        paths)
-  paths)
+  (cl-loop for path in paths
+    ;; If the file does not exist in the current directory...
+    unless (and (file-exists-p (file-name-nondirectory path))
+                ;; ;; ...I don't understand why this is here!
+                ;; ;; Why would there be a directory in the selected
+                ;; ;; files, seeing as one can't mark directories in
+                ;; ;; sxiv?
+                ;; (file-directory-p path)
+              )
+    do (dired-insert-subdir (file-name-directory path))
+    finally return paths))
 
 (defun sxiv-dired-mark-files (files)
   "Mark FILES in the current (dired) buffer."
