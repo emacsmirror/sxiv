@@ -103,51 +103,46 @@ the files listed."
                                    ;; REVIEW - also check if file is an image?
                                    (file-regular-p path-at-point))
                           (file-relative-name path-at-point)))
-         (paths         (cond ((sxiv-dired-marked-files-p)
-                               (dired-get-marked-files))
-                              ((derived-mode-p 'text-mode)
-                               (--> (buffer-substring-no-properties (point-min)
-                                                                    (point-max))
-                                    (split-string it "\n")))
-                              (t (directory-files default-directory))))
-         (paths         (--remove (or (equal it ".")
-                                      (equal it "..")
-                                      ;; Currently, this takes effect even
-                                      ;; when running from a text
-                                      ;; file...should that be the case?
-                                      (-find (lambda (exclude)
-                                               (string-match-p exclude it))
-                                             sxiv-exclude-strings))
-                                  paths))
+         (paths (cond ((sxiv-dired-marked-files-p)
+                       (dired-get-marked-files))
+                      ((derived-mode-p 'text-mode)
+                       (--> (buffer-substring-no-properties (point-min) (point-max))
+                            (split-string it "\n")))
+                      (t (directory-files default-directory))))
+         (paths (--remove (or (equal it ".")
+                              (equal it "..")
+                              ;; Currently, this takes effect even
+                              ;; when running from a text
+                              ;; file...should that be the case?
+                              (-find (lambda (exclude)
+                                       (string-match-p exclude it))
+                                     sxiv-exclude-strings))
+                          paths))
          ;; recurse with prefix arg, or if every path is a directory
-         (recurse       (or prefix
-                            (-every? #'file-directory-p paths)))
+         (recurse (or prefix (-every? #'file-directory-p paths)))
          ;; remove directories if not running recursively
-         (paths         (if recurse
-                            paths
-                          (seq-remove #'file-directory-p paths)))
+         (paths (if recurse paths (seq-remove #'file-directory-p paths)))
          (fn-at-point-index (when fn-at-point
                               (--find-index (equal fn-at-point it)
                                             paths)))
          (fn-at-point-index (when fn-at-point-index
                               (-> (1+ fn-at-point-index)
                                   (number-to-string))))
-         (recurse       (if recurse "-r" ""))
-         (proc          (progn
-                          (message "Running sxiv...")
-                          (make-process :name "sxiv"
-                                        :buffer "sxiv"
-                                        :command
-                                        (append '("sxiv")
-                                                sxiv-arguments
-                                                (when fn-at-point-index
-                                                  (list "-n" fn-at-point-index))
-                                                (list recurse "--")
-                                                paths)
-                                        :connection-type 'pipe
-                                        :stderr "sxiv-errors"))))
+         (recurse       (if recurse "-r" "")))
     (setq sxiv--directory default-directory)
-    (set-process-filter proc #'sxiv-filter)))
+    (message "Running sxiv...")
+    (make-process :name "sxiv"
+                  :buffer "sxiv"
+                  :command
+                  (append '("sxiv")
+                          sxiv-arguments
+                          (when fn-at-point-index
+                            (list "-n" fn-at-point-index))
+                          (list recurse "--")
+                          paths)
+                  :connection-type 'pipe
+                  :filter #'sxiv-filter
+                  :stderr "sxiv-errors")))
 
 ;; Local Variables:
 ;; nameless-current-name: "sxiv"
