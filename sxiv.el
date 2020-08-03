@@ -5,7 +5,7 @@
 ;; Keywords: multimedia
 ;; Homepage: https://gitlab.com/contrapunctus/sxiv.el
 ;; Package-Requires: ((dash "2.16.0") (emacs "25.1"))
-;; Version: 0.3.1
+;; Version: 0.3.3
 
 ;; This is free and unencumbered software released into the public domain.
 ;;
