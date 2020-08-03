@@ -7,7 +7,9 @@ You can get `sxiv.el` from
 `sxiv.el` requires [dash.el](https://github.com/magnars/dash.el) and an installed [sxiv](https://github.com/muennich/sxiv) in your $PATH
 
 ## Usage
-`M-x sxiv` - entry point. Run it in a Dired buffer containing images. Files marked in sxiv will be marked in Dired.
+The main command is `M-x sxiv`.
+
+Run it in a Dired buffer containing images. Files marked in sxiv (mark/unmark with `m`) will be marked in Dired.
 
 If the Dired buffer has marked files, open only those files.
 
