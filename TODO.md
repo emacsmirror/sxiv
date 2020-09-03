@@ -10,4 +10,5 @@
 6. [ ] When running with a lot of files, sxiv may take some time to start. Signal to the user that it is starting, and let them kill it if they want.
 7. [ ] `sxiv-exclude-strings` does not work recursively, because only the directories are passed to the process. Adding all files to the path might cause it to fail (bash length limit), or take a long time.
 8. [ ] Make it work in find-dired buffers too
-9. [ ] Bug - sometimes, if a lot of files (e.g. >50) are marked in sxiv, the input received by `sxiv-insert-subdirs` is incomplete (i.e. the first file name is a trailing segment of an actual existing filename, e.g. if a file is called `"foo/bar_baz.jpg"`, I might get something like `"r_baz.jpg"` as the first element).
+9. [ ] Bug - sometimes, if a lot of files (usually over 50) are marked in sxiv, the input received by `sxiv-insert-subdirs` is incomplete - the first file name is a trailing segment of an actual existing filename, e.g. if a file is called `"foo/bar_baz.jpg"`, I might get something like `"r_baz.jpg"` as the first element.
+10. [ ] Optimize startup speed, especially with a large number of files.
