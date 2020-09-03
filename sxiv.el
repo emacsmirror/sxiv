@@ -58,7 +58,9 @@ With no marked files, or if not in a Dired buffer, return nil."
 Return PATHS unchanged."
   (cl-loop for path in paths
     ;; If the file does not exist in the current directory...
-    unless (and (file-exists-p (file-name-nondirectory path))
+    when (and (not (file-exists-p (file-name-nondirectory path)))
+              ;; Workaround for what looks like an Emacs issue (see TODO #9)
+              (file-exists-p path)
                 ;; ;; ...I don't understand why this is here!
                 ;; ;; Why would there be a directory in the selected
                 ;; ;; files, seeing as one can't mark directories in
