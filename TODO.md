@@ -16,4 +16,4 @@
 10. [ ] Optimize startup speed, especially with a large number of files.
 11. [ ] When using a text file, mark files marked in sxiv.
     * Maybe using multiple-cursors or iedit?
-12. [ ] When launching from a text file, open sxiv with the image at point (using `-n`).
+12. [x] When launching from a text file, open sxiv with the image at point (using `-n`).
