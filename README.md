@@ -1,3 +1,7 @@
+<a href="https://liberapay.com/contrapunctus/donate"><img alt="Donate using Liberapay" src="https://img.shields.io/liberapay/receives/contrapunctus.svg?logo=liberapay"></a>
+
+<a href="https://melpa.org/#/sxiv"><img src="https://melpa.org/packages/sxiv-badge.svg"></a>
+
 # sxiv.el
 Launch [sxiv](https://github.com/muennich/sxiv) (Simple X Image Viewer) from Emacs, with Dired integration.
 
