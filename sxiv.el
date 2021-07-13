@@ -1,4 +1,4 @@
-;;; sxiv.el --- Run the sxiv image viewer -*- lexical-binding: t; -*-
+;;; sxiv.el --- Run the Simple X Image Viewer, with Dired integration -*- lexical-binding: t; -*-
 
 ;; Author: contrapunctus <xmpp:contrapunctus@jabber.fr>
 ;; Maintainer: contrapunctus <xmpp:contrapunctus@jabber.fr>
@@ -17,8 +17,16 @@
 ;; For more information, please refer to <https://unlicense.org>
 
 ;;; Commentary:
-;; The sole command and primary entry point is `sxiv'.
+;; The main (and only) command is `M-x sxiv`.
 ;;
+;; If it is run in a Dired buffer containing images, files marked in
+;; sxiv (mark/unmark with `m`) will be marked in Dired. If the Dired
+;; buffer has marked files, open only those files. With prefix
+;; argument, or when only provided directories, run recursively.
+;;
+;; It can also be run from a text file containing one file name per
+;; line.
+
 ;; `sxiv-filter' is the process filter, to insert subdirectories (via
 ;; `sxiv-insert-subdirs') and mark files marked in sxiv (via
 ;; `sxiv-dired-mark-files').
@@ -106,7 +114,7 @@ OUTPUT is the output of the sxiv process as a string."
 (defun sxiv-file-at-point-index (&optional paths)
   "Return index of file at point.
 PATHS should be a list of relative file names as strings, and is
-required for dired-mode buffers."
+required for `dired-mode' buffers."
   (cond ((derived-mode-p 'dired-mode)
          (let* ((path-at-point (dired-file-name-at-point))
                 (image-at-point (and path-at-point
