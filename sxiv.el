@@ -3,7 +3,7 @@
 ;; Author: contrapunctus <xmpp:contrapunctus@jabber.fr>
 ;; Maintainer: contrapunctus <xmpp:contrapunctus@jabber.fr>
 ;; Keywords: multimedia
-;; Homepage: https://gitlab.com/contrapunctus/sxiv.el
+;; Homepage: https://tildegit.org/contrapunctus/sxiv
 ;; Package-Requires: ((dash "2.16.0") (emacs "25.1"))
 ;; Version: 0.4.1
 
@@ -26,7 +26,7 @@
 ;;
 ;; It can also be run from a text file containing one file name per
 ;; line.
-
+;;
 ;; `sxiv-filter' is the process filter, to insert subdirectories (via
 ;; `sxiv-insert-subdirs') and mark files marked in sxiv (via
 ;; `sxiv-dired-mark-files').
