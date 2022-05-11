@@ -88,8 +88,9 @@ Return PATHS unchanged."
   "Open a `dired' buffer and mark any files marked by the user in `sxiv'."
   (find-file sxiv--directory)
   (let ((files (--> (split-string output "\n")
-                 (-drop-last 1 it)
-                 (sxiv-insert-subdirs it))))
+                    (-drop-last 1 it)
+                    (mapcar #'file-relative-name it)
+                    (sxiv-insert-subdirs it))))
     (dired-mark-if
      (and (not (looking-at-p dired-re-dot))
           (not (eolp))
