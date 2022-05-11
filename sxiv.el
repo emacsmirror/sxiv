@@ -103,13 +103,20 @@ OUTPUT is the output of the sxiv process as a string."
   (run-hook-with-args 'sxiv-after-exit-functions process output))
 
 (defun sxiv-paths-raw ()
-  (cond ((sxiv-dired-marked-files-p)
-         (dired-get-marked-files))
+  "Return a list of strings containing absolute paths to files."
+  (cond ((derived-mode-p 'dired-mode)
+         (if (sxiv-dired-marked-files-p)
+             (dired-get-marked-files)
+           (let (list)
+             (dired-map-dired-file-lines
+              (lambda (name)
+                (setq list (cons name list))))
+             (reverse list))))
         ((derived-mode-p 'text-mode)
          (split-string
           (buffer-substring-no-properties (point-min) (point-max))
           "\n"))
-        (t (directory-files default-directory))))
+        (t (user-error "sxiv: this is not a dired or text buffer"))))
 
 (defun sxiv-file-at-point-index (&optional paths)
   "Return index of file at point.
@@ -129,10 +136,10 @@ required for `dired-mode' buffers."
 
 (defun sxiv (&optional prefix)
   "Run sxiv(1), the Simple X Image Viewer.
-By default, when run in a Dired buffer, open all files in the
-current directory. Files marked in sxiv will be marked in Dired.
+When run in a Dired buffer, open all files in the current
+directory. Files marked in sxiv will be marked in Dired.
 
-If run from a Dired buffer with marked files, open only those
+When run from a Dired buffer with marked files, open only those
 files.
 
 With prefix argument PREFIX, or when only provided directories,
@@ -150,9 +157,12 @@ the files listed."
                                        sxiv-exclude-strings))
                             (sxiv-paths-raw)))
          ;; recurse with prefix arg, or if every path is a directory
-         (recurse (or prefix (-every? #'file-directory-p paths)))
+         (recurse (or prefix
+                      (-every? #'file-directory-p paths)))
          ;; remove directories if not running recursively
-         (paths   (if recurse paths (seq-remove #'file-directory-p paths)))
+         (paths   (if recurse
+                      paths
+                    (seq-remove #'file-directory-p paths)))
          (index   (sxiv-file-at-point-index paths))
          (index   (when index (number-to-string index)))
          (recurse (if recurse "-r" "")))
