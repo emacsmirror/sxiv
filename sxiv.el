@@ -127,7 +127,7 @@ required for `dired-mode' buffers."
                 (image-at-point (and path-at-point
                                      ;; REVIEW - also check if file is an image?
                                      (file-regular-p path-at-point)
-                                     (file-relative-name path-at-point)))
+                                     path-at-point))
                 (index (when image-at-point
                          (--find-index (equal image-at-point it) paths))))
            (when index (1+ index))))
